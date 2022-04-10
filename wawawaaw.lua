@@ -101,9 +101,9 @@ local themeMeta = setmetatable({
 	end
 })
 
-if not isfolder("HI_LOL\\Themes") then
-	pcall(makefolder, "HI_LOL")
-	pcall(makefolder, "HI_LOL\\Themes")
+if not isfolder("Orion Purple\\Themes") then
+	pcall(makefolder, "Orion Purple")
+	pcall(makefolder, "Orion Purple\\Themes")
 end
 
 for i, v in next, themes.Default do
@@ -286,7 +286,7 @@ end
 
 for i, v in next, themes do
 	if i ~= "selected" then
-		writefile("HI_LOL\\Themes\\" .. i .. ".json", jsonEncodeTheme(v))
+		writefile("Orion Purple\\Themes\\" .. i .. ".json", jsonEncodeTheme(v))
 	end
 end
 
@@ -850,13 +850,13 @@ library.__index = library
 function library.new(gameName)
 	local lib = setmetatable({
 		_name = gameName,
-		_gui = create("ScreenGui", { Name = "HI_LOL", ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
+		_gui = create("ScreenGui", { Name = "Orion Purple", ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
 			create("Frame", { Name = "main", BackgroundColor3 = "theme.mainBackground", ClipsDescendants = true, Position = UDim2.new(0, 100, 0, 100), Size = UDim2.new(0, 535, 0, 380) }, {
 				create("ScrollingFrame", { Name = "dashboard", BackgroundTransparency = 1, BorderSizePixel = 0, BottomImage = "rbxassetid://7702689828", ClipsDescendants = true, MidImage = "rbxassetid://7702695076", Position = UDim2.new(0, 5, 0, 39), ScrollBarImageColor3 = "theme.panelBackground", ScrollBarThickness = 5, Size = UDim2.new(1, -10, 0, 315), TopImage = "rbxassetid://7702696403" }, {
 					create("UIGridLayout", { Name = "uigrid", CellPadding = UDim2.new(0, 5, 0, 5), CellSize = UDim2.new(0, 255, 0, 0), FillDirectionMaxCells = 2, SortOrder = Enum.SortOrder.LayoutOrder })
 				}),
 				create("Frame", { Name = "top", BackgroundColor3 = "theme.topBackground", Size = UDim2.new(1, 0, 0, 34), ZIndex = 2 }, {
-					create("TextLabel", { Name = "title", BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0, 34, 0, 0), Size = UDim2.new(1, -68, 1, 0), Text = "HI_LOL | " .. gameName, TextColor3 = "theme.textForeground", TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left }),
+					create("TextLabel", { Name = "title", BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0, 34, 0, 0), Size = UDim2.new(1, -68, 1, 0), Text = "Orion Purple | " .. gameName, TextColor3 = "theme.textForeground", TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left }),
 					create("Frame", { Name = "home", BackgroundColor3 = "theme.topBackground", Position = UDim2.new(0, 5, 0, 5), Size = UDim2.new(0, 24, 0, 24) }, {
 						create("ImageLabel", { Name = "icon", BackgroundTransparency = 1, Image = "rbxassetid://7804268020", ImageColor3 = "theme.imageForeground", Size = UDim2.new(1, 0, 1, 0) })
 					}, UDim.new(0, 4)),
@@ -979,8 +979,8 @@ end
 
 function library:GetConfigs()
 	local configs = {}
-	if isfolder("HI_LOL\\Configs\\" .. self._name) then
-		for i, v in next, listfiles("HI_LOL\\Configs\\" .. self._name) do
+	if isfolder("Orion Purple\\Configs\\" .. self._name) then
+		for i, v in next, listfiles("Orion Purple\\Configs\\" .. self._name) do
 			local split = select(-1, unpack(v:split("\\")))
 			if split:find(".json") then
 				configs[#configs + 1] = split:gsub(".json", "")
@@ -991,8 +991,8 @@ function library:GetConfigs()
 end
 
 function library:LoadConfig(name)
-	local filePath = "HI_LOL\\Configs\\" .. self._name .. "\\" .. name .. ".json"
-	if not (isfolder("HI_LOL\\Configs\\" .. self._name) and isfile(filePath)) then
+	local filePath = "Orion Purple\\Configs\\" .. self._name .. "\\" .. name .. ".json"
+	if not (isfolder("Orion Purple\\Configs\\" .. self._name) and isfile(filePath)) then
 		return
 	end
 	local config = select(2, pcall(function() return httpService:JSONDecode(readfile(filePath)) end))
@@ -1016,10 +1016,10 @@ function library:LoadConfig(name)
 end
 
 function library:SaveConfig(name)
-	if not isfolder("HI_LOL\\Configs\\" .. self._name) then
-		pcall(makefolder, "HI_LOL")
-		pcall(makefolder, "HI_LOL\\Configs")
-		pcall(makefolder, "HI_LOL\\Configs\\" .. self._name)
+	if not isfolder("Orion Purple\\Configs\\" .. self._name) then
+		pcall(makefolder, "Orion Purple")
+		pcall(makefolder, "Orion Purple\\Configs")
+		pcall(makefolder, "Orion Purple\\Configs\\" .. self._name)
 	end
 	local config = {}
 	for _, tab in next, self._tabs do
@@ -1033,12 +1033,12 @@ function library:SaveConfig(name)
 			end
 		end
 	end
-	writefile("HI_LOL\\Configs\\" .. self._name .. "\\" .. name .. ".json", httpService:JSONEncode(config))
+	writefile("Orion Purple\\Configs\\" .. self._name .. "\\" .. name .. ".json", httpService:JSONEncode(config))
 end
 
 function library:DeleteConfig(name)
-	local filePath = "HI_LOL\\Configs\\" .. self._name .. "\\" .. name .. ".json"
-	if not (isfolder("HI_LOL\\Configs\\" .. self._name) and isfile(filePath)) then
+	local filePath = "Orion Purple\\Configs\\" .. self._name .. "\\" .. name .. ".json"
+	if not (isfolder("Orion Purple\\Configs\\" .. self._name) and isfile(filePath)) then
 		return
 	end
 	delfile(filePath)
@@ -1046,11 +1046,11 @@ end
 
 function library:GetThemes()
 	local themeNames = {}
-	if not isfolder("HI_LOL\\Themes") then
-		pcall(makefolder, "HI_LOL")
-		pcall(makefolder, "HI_LOL\\Themes")
+	if not isfolder("Orion Purple\\Themes") then
+		pcall(makefolder, "Orion Purple")
+		pcall(makefolder, "Orion Purple\\Themes")
 	end
-	for i, v in next, listfiles("HI_LOL\\Themes") do
+	for i, v in next, listfiles("Orion Purple\\Themes") do
 		local split = select(-1, unpack(v:split("\\")))
 		if split:find(".json") then
 			themeNames[#themeNames + 1] = split:gsub(".json", "")
@@ -1065,8 +1065,8 @@ function library:GetThemes()
 end
 
 function library:LoadTheme(name)
-	local filePath = "HI_LOL\\Themes\\" .. name .. ".json"
-	if not (isfolder("HI_LOL\\Themes") and isfile(filePath)) then
+	local filePath = "Orion Purple\\Themes\\" .. name .. ".json"
+	if not (isfolder("Orion Purple\\Themes") and isfile(filePath)) then
 		print("noes")
 		return
 	end
@@ -1158,7 +1158,7 @@ end
 function library:Notify(text, callback, options)
 	local sizeY, called = textService:GetTextSize(text, 13, Enum.Font.Gotham, Vector2.new(260, math.huge)).Y + 10, false
 	local frame = create("Frame", { Name = "notification", AnchorPoint = Vector2.new(1, 1), BackgroundColor3 = "theme.panelItemBackground", ClipsDescendants = true, Parent = self._gui.notifs, Position = UDim2.new(1, 300, 1, -30), Size = UDim2.new(0, 280, 0, sizeY + 34) }, {
-		create("TextLabel", { Name = "title", BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0, 10, 0, 0), Size = UDim2.new(1, -66, 0, 30), Text = "HI_LOL Notification", TextColor3 = "theme.textForeground", TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left }),
+		create("TextLabel", { Name = "title", BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0, 10, 0, 0), Size = UDim2.new(1, -66, 0, 30), Text = "Orion Purple Notification", TextColor3 = "theme.textForeground", TextSize = 14, TextXAlignment = Enum.TextXAlignment.Left }),
 		create("TextLabel", { Name = "content", AnchorPoint = Vector2.new(0.5, 0), BackgroundTransparency = 1, Font = Enum.Font.GothamSemibold, Position = UDim2.new(0.5, 0, 0, 26), Size = UDim2.new(1, -20, 0, sizeY), Text = text, TextColor3 = "theme.notifTextForeground", TextSize = 13, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Left }),
 		create("Frame", { Name = "yes", AnchorPoint = Vector2.new(1, 0), BackgroundColor3 = "theme.panelItemBackground", Position = UDim2.new(1, -30, 0, 4), Size = UDim2.new(0, 22, 0, 22) }, {
 			create("ImageLabel", { Name = "icon", AnchorPoint = Vector2.new(0.5, 0.5), BackgroundTransparency = 1, Image = "rbxassetid://7234543866", Position = UDim2.new(0.5, 0, 0.5, 0), Size = UDim2.new(1, 0, 1, 0) })
